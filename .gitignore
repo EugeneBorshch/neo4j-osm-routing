@@ -1,0 +1,9 @@
+.gradle/
+build/
+.idea/
+neo4j-osm-route-calculation.iml
+out/
+db/
+src/main/Main.iml
+src/test/Test.iml
+

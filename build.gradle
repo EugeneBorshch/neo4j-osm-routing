@@ -1,0 +1,48 @@
+apply plugin: 'java'
+buildscript {
+    repositories {
+        ivy {
+            name = 'gradle_templates'
+            artifactPattern "http://launchpad.net/[organization]/trunk/[revision]/+download/[artifact]-[revision].jar"
+        }
+    }
+    dependencies {
+        classpath 'gradle-templates:templates:1.2'
+    }
+}
+// Check to make sure templates.TemplatesPlugin isn't already added.
+if (!project.plugins.findPlugin(templates.TemplatesPlugin)) {
+    project.apply(plugin: templates.TemplatesPlugin)
+}
+apply plugin: "templates"
+
+repositories {
+
+    mavenCentral()
+    maven {
+        // Look for POMs and artifacts, such as JARs, here
+        url "http://m2.neo4j.org/content/repositories/releases"
+        artifactUrls "http://download.osgeo.org/webdav/geotools/"
+        artifactUrls "http://repo.opengeo.org"
+    }
+
+}
+
+
+dependencies {
+
+    // Pull in all of the Neo4j dependencies
+    compile group: 'org.neo4j', name: 'neo4j-spatial', version: '0.9+'
+    compile group: 'org.neo4j', name: 'neo4j', version: '1.8+'
+    compile group: 'org.geotools', name: 'gt-referencing', version: '8.0'
+    compile group: 'org.geotools', name: 'gt-cql', version: '8.0'
+    compile group: 'org.geotools', name: 'gt-metadata', version: '8.0'
+    compile group: 'org.opengis', name: 'geoapi', version: '2.3+'
+    compile group: 'javax.measure', name: 'jsr-275', version: '0.9.0'
+    compile group: 'commons-collections', name: 'commons-collections', version: '3.2.1'
+    compile group: 'com.vividsolutions', name: 'jts', version: '1.12'
+
+    compile "com.tinkerpop.gremlin:gremlin-groovy:1.5+"
+
+    testCompile group: 'junit', name: 'junit', version: '4.8+'
+}
