@@ -1,12 +1,10 @@
 package com.eugeneborshch.routecalculator;
 
 import com.eugeneborshch.routecalculator.load.OsmImporter;
+import com.eugeneborshch.routecalculator.optimize.OsmRoutingOptimizer;
 import org.junit.Test;
 import org.neo4j.graphdb.GraphDatabaseService;
-import org.neo4j.graphdb.Node;
-import org.neo4j.graphdb.Relationship;
 import org.neo4j.kernel.EmbeddedGraphDatabase;
-import org.neo4j.tooling.GlobalGraphOperations;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
@@ -34,7 +32,7 @@ public class RouteCalculatorTest {
         //OsmRouteCalculator osmRouteCalculator = new OsmRouteCalculator(db, layerName);
         //osmRouteCalculator.findRoute();
 
-        GlobalGraphOperations graphOperations = GlobalGraphOperations.at(db);
+        /*   GlobalGraphOperations graphOperations = GlobalGraphOperations.at(db);
         Iterable<Node> allNodes = graphOperations.getAllNodes();
         for (Node node : allNodes) {
             String dump = "" + node.getId() + " ";
@@ -54,11 +52,16 @@ public class RouteCalculatorTest {
 
 
             System.out.println(dump);
-        }
+        }*/
+
+
+        new OsmRoutingOptimizer(db).optimize();
 
         db.shutdown();
 
     }
+
+
 
     public void deleteDir(String name) {
         File file = new File(name);

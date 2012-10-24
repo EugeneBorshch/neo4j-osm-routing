@@ -1,13 +1,9 @@
 package com.eugeneborshch.routecalculator;
 
-import sun.jvm.hotspot.debugger.linux.amd64.LinuxAMD64ThreadContext;
-
 /**
- * Created with IntelliJ IDEA.
- * User: vinsent
- * Date: 10/18/12
- * Time: 10:40 PM
- * To change this template use File | Settings | File Templates.
+ * Neo4j entity properties for OSM data
+ * <p/>
+ * User: Eugene Borshch
  */
 public enum OsmEntityAttributeKey {
 

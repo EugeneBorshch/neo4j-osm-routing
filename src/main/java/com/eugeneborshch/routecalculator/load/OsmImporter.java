@@ -30,8 +30,8 @@ public class OsmImporter {
         try {
 
             XMLReader xmlReader = XMLReaderFactory.createXMLReader();
-            xmlReader.setContentHandler ( new MainOSMHandler(xmlReader, graphDb)) ;
-            xmlReader.parse ( xml );
+            xmlReader.setContentHandler(new MainOSMHandler(xmlReader, graphDb));
+            xmlReader.parse(xml);
 
             // Hallelujah
             tx.success();
