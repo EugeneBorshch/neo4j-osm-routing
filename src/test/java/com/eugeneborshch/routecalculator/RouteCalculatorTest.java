@@ -4,7 +4,10 @@ import com.eugeneborshch.routecalculator.load.OsmImporter;
 import com.eugeneborshch.routecalculator.optimize.OsmRoutingOptimizer;
 import org.junit.Test;
 import org.neo4j.graphdb.GraphDatabaseService;
+import org.neo4j.graphdb.Node;
+import org.neo4j.graphdb.Relationship;
 import org.neo4j.kernel.EmbeddedGraphDatabase;
+import org.neo4j.tooling.GlobalGraphOperations;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
@@ -55,12 +58,35 @@ public class RouteCalculatorTest {
         }*/
 
 
+        GlobalGraphOperations graphOperations = GlobalGraphOperations.at(db);
+
+        System.out.printf("BEFORE OPTIMIZE nodes =  %d  ways = %d  \n", nodesCount(graphOperations), relCount(graphOperations));
+
         new OsmRoutingOptimizer(db).optimize();
+
+        System.out.printf("AFTER OPTIMIZE nodes =  %d  ways = %d  \n", nodesCount(graphOperations), relCount(graphOperations));
 
         db.shutdown();
 
     }
 
+    private long nodesCount(GlobalGraphOperations graphOperations) {
+        long count = 0;
+        Iterable<Node> allNodes = graphOperations.getAllNodes();
+        for (Node node : allNodes) {
+            count++;
+        }
+        return count;
+    }
+
+    private long relCount(GlobalGraphOperations graphOperations) {
+        long count = 0;
+        Iterable<Relationship> all = graphOperations.getAllRelationships();
+        for (Relationship rel : all) {
+            count++;
+        }
+        return count;
+    }
 
 
     public void deleteDir(String name) {

@@ -64,15 +64,18 @@ public class WayMerger {
         boolean isFlushed = false;
 
         if (isEnd || isJunction) {
-            if (accum.size() > 1) {
+            if (accum.size() > 0) {
                 roadParts.add(accum);
                 isFlushed = true;
             }
         }
 
-        List<Relationship> nextAccum = isFlushed ? new ArrayList<Relationship>() : accum;
+
         for (Relationship rel : relationships) {
-            nextAccum.add(rel);
+            List<Relationship> nextAccum = isFlushed ? new ArrayList<Relationship>() : accum;
+            if (!visited.contains(rel)) {
+                nextAccum.add(rel);
+            }
             visited.add(rel);
             merge(wayId, rel.getEndNode(), nextAccum);
 

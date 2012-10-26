@@ -11,5 +11,7 @@ public enum OsmEntityAttributeKey {
     NODE_LON,
     NODE_LAT,
     WAY_ID,
-    WAY_NAME
+    WAY_NAME,
+    WAY_GEOMETRY,
+    WAY_DISTANCE
 }
