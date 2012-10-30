@@ -6,4 +6,4 @@ out/
 db/
 src/main/Main.iml
 src/test/Test.iml
-
+*.kml

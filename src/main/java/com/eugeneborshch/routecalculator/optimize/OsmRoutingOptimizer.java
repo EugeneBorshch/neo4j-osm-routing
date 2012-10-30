@@ -118,7 +118,7 @@ public class OsmRoutingOptimizer {
                     graphDb.index().forRelationships("ways").remove(chunk);
                     chunk.delete();
 
-                    graphDb.index().forNodes("ways").remove(startNode);
+                    graphDb.index().forNodes("nodes").remove(startNode);
                     startNode.delete();
 
                 }
